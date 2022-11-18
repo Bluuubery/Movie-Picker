@@ -7,4 +7,4 @@ from django.contrib.auth.models import AbstractUser
 class User(AbstractUser):
     watched_movies = models.ManyToManyField(Movie, related_name='watched_user')
     to_watch_movies = models.ManyToManyField(Movie, related_name='to_watch_user')
-    pass
+    
