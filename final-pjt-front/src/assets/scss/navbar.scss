@@ -1,0 +1,49 @@
+@import './common.scss';
+
+.navbar {
+  height: 100%;
+  width: 245px;
+  box-sizing: border-box;
+  background-color: $bg-color;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid transparent;
+  // background: linear-gradient($bg-color, $bg-color) padding-box, $gradiant01 border-box;
+  &__logo {
+    font-family: $title-font;
+    font-weight: 700;
+    font-size: 1.5rem;
+    height: 72px;
+    color: transparent;
+    background: $gradiant01;
+    -webkit-background-clip: text;
+  }
+  &__user {
+    height: 52px;
+  }
+  a {
+    text-decoration: none;
+    color: white;
+  }
+  &__routers {
+    display: flex;
+    flex-direction: column;
+    a {
+      display: flex;
+      margin-bottom: 24px;
+      align-items: center;
+      svg {
+        fill: white;
+        width: 24px;
+        margin-right: 12px;
+      }
+    }
+  }
+}
+
+.active {
+  color: transparent;
+  background: $gradiant01;
+  -webkit-background-clip: text;
+}

@@ -1,0 +1,48 @@
+@import './common.scss';
+
+.search-bar {
+  position: fixed;
+  top: calc((15% - 40px) / 2);
+  align-items: center;
+  display: flex;
+  width: 40%;
+  height: 40px;
+  border-radius: 20px;
+  border: 1px solid transparent;
+  background: linear-gradient($bg-color, $bg-color) padding-box, $gradiant01 border-box;
+  padding: 0px 16px;
+  box-sizing: border-box;
+
+  svg {
+    fill: $grey1;
+    position: relative;
+    height: 50%;
+    // left: 3%;
+  }
+  &__form {
+    border: none;
+    height: fit-content;
+    padding: 0px 16px;
+    input {
+      border: none;
+      background-color: transparent;
+      width: 100%;
+      color: white;
+      // color: transparent;
+      // background: $gradiant01;
+      // -webkit-background-clip: text;
+      &::placeholder {
+        color: white;
+        // color: transparent;
+        // background: $gradiant01;
+        // -webkit-background-clip: text;
+      }
+      &:focus::placeholder {
+        color: transparent;
+      }
+    }
+    input[type="submit"] {
+      display: none;
+    }
+}
+}
