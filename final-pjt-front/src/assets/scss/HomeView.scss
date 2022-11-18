@@ -1,0 +1,156 @@
+@import './common.scss';
+
+.home {
+  color: $bg-color;
+  width: calc(1440px - 245px);
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  align-items: center;
+  height: 85%;
+  .home-title {
+    font-family: $title-font;
+    font-size: 2rem;
+    margin-bottom: 16px;
+    font-weight: bold;
+    color: transparent;
+    background: $gradiant01;
+    height: fit-content;
+    -webkit-background-clip: text;
+    padding-bottom: 1px;
+  }
+  // &__search-container {
+  //   height: 10%;
+  //   width: 100%;
+  //   display: flex;
+  //   position: relative;
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+  &__main-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    padding: 0px 32px 32px 32px;
+    box-sizing: border-box;
+    &__left {
+      width: calc(65% - 16px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .best-movie, .world-cup {
+        height: 48%;
+      }
+    }
+    &__right {
+      width: calc(35% - 16px);
+      .container {
+        padding: 24px;
+      }
+    }
+  }
+}
+
+.best-movie .container, .home__main-container__right .container {
+  background-color: $container;
+  box-sizing: border-box;
+  border-radius: 20px;
+  height: calc(100% - 48px);
+  overflow: hidden;
+  color: white;;
+  border: 1px solid transparent;
+  background: linear-gradient($container, $container) padding-box, $gradiant01 border-box;
+}
+
+// 내 인생영화
+.best-movie {
+  .container {
+    padding: 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  &__poster {
+    width: 178px;
+    height: 255px;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-right: 32px;
+    // background-image: url();
+    // background-size: cover;
+    // background-position: center;
+    // background-repeat: no-repeat;
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &__info {
+    width: 40%;
+    &__date {
+      font-size: 1.2rem;
+      margin-bottom: 8px;
+    }
+    &__movie-title {
+      font-size: 2.5rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+    &__movie-info {
+      color: rgba($color: #ffffff, $alpha: 0.5);
+      margin-bottom: 32px;
+    }
+    &__comment {
+      font-size: 1.2rem;
+      h4 {
+        margin-bottom: 16px;
+      }
+      &__content {
+        line-height: 1.6rem;
+      }
+    }
+  }
+}
+
+// 내 인생영화 찾기
+.world-cup {
+  .container{
+    background-color: transparent;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2%;
+    height: calc((94% - 48px) / 2);
+  }
+  &__game {
+    width: calc(94% / 4);
+    margin-bottom: 2%;
+    height: 100%;
+    background-color: $grey2;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+// 명에의 전당
+.record {
+  height: 155px;
+  display: flex;
+  margin-bottom: 16px;
+  &__poster {
+    width: 105px;
+    height: 100%;
+    border-radius: 5px;
+    overflow: hidden;
+    img {
+      height: 101%;
+      object-fit: cover;
+    }
+  }
+}
