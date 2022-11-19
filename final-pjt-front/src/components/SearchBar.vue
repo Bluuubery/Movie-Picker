@@ -34,15 +34,17 @@ export default {
       this.$router.push({ name: 'home'})
     },
     searchMovie(event) {
-      const API_KEY = 'c581f1610e43286d30878166da7fe85e'
+      // const API_KEY = 'c581f1610e43286d30878166da7fe85e'
       const query = event.target.value
-      const TMDB_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KO&query=${query}&page=1&include_adult=false`
+      // const TMDB_URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&language=ko-KO&query=${query}&page=1&include_adult=false`
+      const SEARCH_URL = `http://127.0.0.1:8000/api/movies/search_movie/${query}/`
       axios({
         method: 'get',
-        url: TMDB_URL
+        url: SEARCH_URL
       })
       .then(res => {
-        const movies = res.data.results
+        // console.log(res)
+        const movies = res.data
         console.log(movies)
       })
     }
