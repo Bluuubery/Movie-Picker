@@ -44,8 +44,8 @@ export default {
         method: 'get',
         url: SEARCH_URL,
         headers: {
-            Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d` //임시 토큰
-            // Authorization: `Token ${ this.$store.state.token }`
+            // Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d` //임시 토큰
+            Authorization: `Token ${ this.$store.state.token }`
         }
       })
       .then(res => {

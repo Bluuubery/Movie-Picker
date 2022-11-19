@@ -1,33 +1,36 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-// import store from '../store'
+import store from '../store'
 // import HomeView from '../views/HomeView.vue'
 // import LoginView from '../views/LoginView.vue'
 // import SignupView from '../views/SignupView.vue'
 
 Vue.use(VueRouter)
 
-// const isLoggedIn = store.getters.isLogin
+
+
+// const isLoggedIn = store.getters.isLoggedIn
 
 const routes = [
   {
     path: '/',
     name: 'home',
     component: () => import('../views/HomeView.vue'),
-    // beforeEnter(to, from, next) {
-    //   console.log(to, from, next)
-    //   console.log(store)
-    //   if (isLoggedIn) {
-    //     next({ name: 'home' })
-    //   } else {
-    //     next({ name: 'login'})
-    //   }
-    // }
   },
   {
     path: '/login',
     name: 'login',
-    component: () => import('../views/LoginView.vue')
+    component: () => import('../views/LoginView.vue'),
+    beforeEnter: (to, from, next) => {
+      const isLoggedIn = store.getters.isLoggedIn
+
+      if (isLoggedIn === true) {
+        // console.log('이미 로그인')
+        next({ name: 'home' })
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/signup',
@@ -59,12 +62,28 @@ const routes = [
   //   name: 'browse',
   //   component: () => import('../views/BrowseView.vue')
   // },
+
 ]
 
 const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const isLoggedIn = store.getters.isLoggedIn
+
+  const allowAllPages = ['login']
+
+  //이동할 페이지(to)가 로그인이 필요한 사이트인지 확인
+  const isAuthRequired = !allowAllPages.includes(to.name)
+
+  if (isAuthRequired && !isLoggedIn) {
+    next({ name: 'login' })
+  } else {
+    next()
+  }
 })
 
 export default router
