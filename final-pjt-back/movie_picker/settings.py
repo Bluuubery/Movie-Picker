@@ -39,6 +39,9 @@ INSTALLED_APPS = [
     # drf
     'rest_framework',
 
+    # drf-spectacular
+    'drf_spectacular',
+
     # CORS policy
     "corsheaders",
 
@@ -101,9 +104,20 @@ REST_FRAMEWORK = {
     # 모든 요청 허용
     # permission
     'DEFAULT_PERMISSION_CLASSES': [
-        # 'rest_framework.permissions.IsAuthenticated',
-        'rest_framework.permissions.AllowAny',
+    # 'rest_framework.permissions.IsAuthenticated',
+    'rest_framework.permissions.AllowAny',
     ],
+
+    # spectacular Settings
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+}
+
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'SSAFY Final PJT API',
+    'DESCRIPTION': '유선준 & 이은지 SSAFY 최종 PJT(Movie Picker)의 API입니다.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    # OTHER SETTINGS
 }
 
 ROOT_URLCONF = 'movie_picker.urls'

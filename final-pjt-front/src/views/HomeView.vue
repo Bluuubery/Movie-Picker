@@ -82,8 +82,10 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch('getUser')
+  },
+  mounted() {
     this.clearSearchBar();
-    
   },
   methods: {
     // getUser() {
@@ -95,7 +97,8 @@ export default {
     // },
     clearSearchBar() {
       const searchInput = document.querySelector('.search-bar__form input[type="text"]')
-      searchInput.value = '';
+      // console.log(searchInput)
+      searchInput.value = null;
     },
     // 영화 디테일 페이지로 이동
     goMovieDetail(movie_id) {
@@ -114,9 +117,9 @@ export default {
       return this.$store.state.best_movie
     },
     // 명예의 전당 리스트
-    best_movies() {
-      return this.$store.state.all_best_movies
-    },
+    // best_movies() {
+    //   return this.$store.state.all_best_movies
+    // },
     // 인생영화 포스터 이미지 url
     bestMovie_imgSrc() {
       const IMG_SIZE = 'w200';
@@ -147,4 +150,6 @@ export default {
 
 <style lang="scss">
 @import '../assets/scss/HomeView.scss';
+
+
 </style>

@@ -103,20 +103,38 @@ export default {
         // 유저의 watched_movie POST 요청 보내기
         postUserMovies() {
             const API_URL = this.$store.state.API_URL;
-            const user_pk = 1; // 임시 유저 pk 값
+            const user_pk = this.$store.state.user_pk; 
             this.clickedMoviesPk.forEach((movie_pk) => {
                 axios({
                     method: 'post',
                     url: `${API_URL}/api/accounts/${user_pk}/${movie_pk}/watched/`,
                     headers: {
-                    Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d` //임시 토큰
-                    // Authorization: `Token ${ this.$store.state.token }`
+                    // Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d` //임시 토큰
+                    Authorization: `Token ${ this.$store.state.token }`
                     }
                 })
-                .then(res => console.log(res))
+                .then(() => {
+                    this.refreshWatchedMovies()
+                    this.$router.push({ name: 'home' })
+                })
                 .catch(err => console.log(err))
             })
-            this.$router.push({ name: 'home' })
+        },
+
+        // watchedmovies를 state에 반영해주는 메서드
+        refreshWatchedMovies(){
+            const API_URL = this.$store.state.API_URL;
+            const user_pk = this.$store.state.user_pk; 
+            axios({
+                method: 'GET',
+                url: `${API_URL}/api/accounts/${user_pk}/watched/`,
+                headers: {
+                Authorization: `Token ${ this.$store.state.token }`
+                }
+            })
+            .then((res) => {
+                this.$store.commit('REFRESH_WATCHED_MOVIES', res.data)
+            })
         }
     },
 };

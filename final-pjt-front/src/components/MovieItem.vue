@@ -1,5 +1,5 @@
 <template>
-  <div class="movie-item" @click="clickMovie($event), $emit('addMovie')" :data-moviePK="movie.id">
+  <div class="movie-item" @click="clickMovie($event), toDetail(), $emit('addMovie')" :data-moviePK="movie.id">
     <div class="movie-item__poster" :style="`background-image: url(https://image.tmdb.org/t/p/w400/${movie.poster_path})`">
       <!-- <img :src="`https://image.tmdb.org/t/p/w400/${movie.fields.poster_path}`" alt=""> -->
     </div>
@@ -36,6 +36,9 @@ export default {
       target.classList.toggle('clicked');
       return
     },
+    toDetail() {
+      this.$router.push({name: 'movieDetail', params: {id: this.movie.id}})
+    }
   },
   filters: {
     getYear(date) {
