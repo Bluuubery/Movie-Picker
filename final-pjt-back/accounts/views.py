@@ -26,7 +26,7 @@ from movies.serializers import *
 def user_profile(request):
     # user = get_object_or_404(get_user_model(), pk=user_pk)
     user = request.user
-    # print(request.user.id)
+    print(request.user.id)
     serializer = ProfileSerializer(user, fields=['id', 'username', 'watched_movies', 'to_watch_movies', 'best_movies'])
     return Response(serializer.data)
 

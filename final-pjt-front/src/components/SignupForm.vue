@@ -37,12 +37,12 @@ export default {
 
   methods: {
     signUp() {
-      const email = this.email
+      const username = this.username
       const password1 = this.password1
       const password2 = this.password2
 
       const payload = {
-        email, password1, password2
+        username, password1, password2
       }
       this.$store.dispatch('signUp', payload)
     }

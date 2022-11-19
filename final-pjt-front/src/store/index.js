@@ -37,23 +37,31 @@ const store = new Vuex.Store({
     // auth
     SAVE_TOKEN(state, token) {
       state.token = token
-      // 저장한 영화가 없는 경우
-      if (!state.best_movie) {
-        router.push({ name: 'first-addMovie'})
-      } else {
-        router.push({ name: 'home'})
-      }
+
+      // 저장한 영화가 없는 경우 (여기서 하는 게 아니라 actions에서 해야됨)
+      // if (!state.best_movie) {
+      //   router.push({ name: 'first-addMovie'})
+      // } else {
+      //   router.push({ name: 'home'})
+      // }
     },
 
     // best_movie(인생영화), all_best_movies(명에의 전당) 저장
     GET_USER(state, data) {
       state.all_best_movies = data['best_movies']
-      // state.all_best_movies.forEach((best_movie) => console.log(best_movie.best_of_best))
-      const idx = state.all_best_movies.map((best_movie) => best_movie.best_of_best === true).lastIndexOf(true)
-      // const idx = state.all_best_movies.findLastIndex((record) => {record.best_of_best === true})
-      // console.log(idx)
-      state.best_movie = state.all_best_movies[idx]
-      // console.log(state.all_best_movies[idx])
+      // console.log(state.all_best_movies)
+
+      // bestmovie가 없으면 추가하는 걸로 보냄
+      if (!state.all_best_movies.length) {
+        router.push({ name: 'first-addMovie'})
+      } else {
+
+        const idx = state.all_best_movies.map((best_movie) => best_movie.best_of_best === true).lastIndexOf(true)
+        // const idx = state.all_best_movies.findLastIndex((record) => {record.best_of_best === true})
+        state.best_movie = state.all_best_movies[idx]
+        
+        router.push({name: 'home'})
+      }
     },
     SAVE_SEARCH_RESULT(state, data) {
       state.search_result = data
@@ -68,14 +76,14 @@ const store = new Vuex.Store({
 
       axios({
         method: 'post',
-        url: `${API_URL}/accounts/signup/`,
+        url: `${API_URL}/dj-rest-auth/registration/`,
         data: {
           username, password1, password2
         }
       })
       .then(res => {
         context.commit('SAVE_TOKEN', res.data.key)
-        // this.dispatch('getUser')
+        this.dispatch('getUser')
       })
       .catch(err => console.log(err))
     },
@@ -102,9 +110,13 @@ const store = new Vuex.Store({
       this.state.password = password
       
     },
+
+
     test() {
       console.log('hi')
     },
+
+
     // 유저 정보
     getUser(context) {
       console.log('here')
@@ -114,8 +126,8 @@ const store = new Vuex.Store({
         // url: `${API_URL}/api/accounts/${context.state.user_pk}`,
         url: `${API_URL}/api/accounts/profile/`,
         headers: {
-          Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d`
-          // Authorization: `Token ${ context.state.token }`
+          // Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d`
+          Authorization: `Token ${ context.state.token }`
         }
       })
       .then(res => {
