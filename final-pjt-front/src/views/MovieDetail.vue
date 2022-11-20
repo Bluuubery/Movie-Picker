@@ -15,9 +15,14 @@
         </div>
       </div>
     </div>
+    <!-- 임시로 삽입한 트레일러 영상입니다. -->
+    <!-- 임시로 삽입한 배경 이미지입니다.` -->
+    <div :style="`background-image: url(https://image.tmdb.org/t/p/w400/${this.backdrop_path})`"></div>
+    <!-- 리뷰 생성창으로 이동 -->
     <div class="create-movie-review">
       <button @click="toCreateReview">review create</button>
     </div>
+    <!-- 하위컴포넌트인 리뷰를 보여줍니다. -->
     <div class="movie-review">
       <MovieReview :movie_pk="this.movie_pk"/>
     </div>
@@ -37,6 +42,8 @@ export default {
     return {
       movie_pk: this.$route.params.id,
       movie_detail: {},
+      trailer: 'NHA69lCd1ZM', //임시 트레일러 영상 주소
+      backdrop_path: '/sPPsR9f4K0movWVQ99u4uMqFzEL.jpg' // 임시 배경
     };
   },
 

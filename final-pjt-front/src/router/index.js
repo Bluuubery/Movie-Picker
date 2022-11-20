@@ -62,6 +62,11 @@ const routes = [
     name: 'reviewCreate',
     component: () => import('../views/ReviewCreateView.vue')
   },
+  {
+    path: '/feed/:userId',
+    name: 'feed',
+    component: () => import('../views/FeedView.vue')
+  },
   // {
   //   path: '/browse',
   //   name: 'browse',

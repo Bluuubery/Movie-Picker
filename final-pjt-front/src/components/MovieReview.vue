@@ -19,7 +19,7 @@ export default {
     };
   },
 	props: {
-		movie_pk : Number
+		movie_pk : String
 	},
   components: {
     MovieReviewItem
@@ -34,7 +34,7 @@ export default {
       },
     })
       .then((res) => {
-        console.log(res.data)
+        // console.log(res.data)
         this.reviews = res.data;
       })
       .catch((err) => console.log(err));
