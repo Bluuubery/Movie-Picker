@@ -53,7 +53,7 @@ class BestMovieSerializer(DynamicFieldsModelSerializer):
 
 
 class ProfileSerializer(DynamicFieldsModelSerializer):
-    best_movies = BestMovieSerializer(many=True, fields=['movie', 'created_at', 'best_of_best'])
+    best_movies = BestMovieSerializer(many=True, fields=['id', 'movie', 'created_at', 'best_of_best'])
     watched_movies = MovieSerializer(many=True)
     to_watch_movies = MovieSerializer(many=True)
 

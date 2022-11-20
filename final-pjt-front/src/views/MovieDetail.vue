@@ -15,7 +15,10 @@
         </div>
       </div>
     </div>
-    <div>
+    <div class="create-movie-review">
+      <button @click="toCreateReview">review create</button>
+    </div>
+    <div class="movie-review">
       <MovieReview :movie_pk="this.movie_pk"/>
     </div>
   </div>
@@ -54,7 +57,11 @@ export default {
       .catch((err) => console.log(err));
   },
 
-  methods: {},
+  methods: {
+    toCreateReview() {
+      this.$router.push({name: 'reviewCreate', params: {id: this.movie_pk}})
+    }
+  },
 };
 </script>
 

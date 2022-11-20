@@ -114,10 +114,18 @@ REST_FRAMEWORK = {
 
 SPECTACULAR_SETTINGS = {
     'TITLE': 'SSAFY Final PJT API',
-    'DESCRIPTION': '유선준 & 이은지 SSAFY 최종 PJT(Movie Picker)의 API입니다.',
+    'DESCRIPTION': '유선준 & 이은지 SSAFY 최종 PJT(Movie Picker)의 API문서입니다.' ,
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
+
     # OTHER SETTINGS
+    "SWAGGER_UI_SETTINGS": {
+        "deepLinking": True,  
+        "persistAuthorization": True,  
+        "displayOperationId": True, 
+        "filter": True,  
+        "docExpansion": "none",  
+    },
 }
 
 ROOT_URLCONF = 'movie_picker.urls'

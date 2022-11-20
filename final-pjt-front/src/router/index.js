@@ -57,6 +57,11 @@ const routes = [
     name: 'game',
     component: () => import('../views/GameView.vue')
   },
+  {
+    path: '/reviewCreate/:movieId',
+    name: 'reviewCreate',
+    component: () => import('../views/ReviewCreateView.vue')
+  },
   // {
   //   path: '/browse',
   //   name: 'browse',
