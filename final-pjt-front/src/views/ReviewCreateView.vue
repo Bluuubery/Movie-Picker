@@ -20,7 +20,7 @@ export default {
 
   data() {
     return {
-			movie_pk: this.$route.params.movie_pk,
+			movieId: this.$route.params.movieId,
 			title: null,
 			content: null
 		};
@@ -41,7 +41,7 @@ export default {
 
       axios({
         method: "post",
-        url: `${API_URL}/api/articles/${this.movie_pk}/review_create/`,
+        url: `${API_URL}/api/articles/${this.movieId}/review_create/`,
         headers: {
           Authorization: `Token ${ this.$store.state.token }`
         },
@@ -51,7 +51,7 @@ export default {
         },
       })
         .then(() => {
-					this.$router.push({name: 'movieDetail', params: {id: this.movie_pk}})
+					this.$router.push({name: 'movieDetail', params: {movieId: this.movieId}})
         })
         .catch((err) => {
           console.log(err);

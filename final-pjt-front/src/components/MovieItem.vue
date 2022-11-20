@@ -37,7 +37,7 @@ export default {
       return
     },
     toDetail() {
-      this.$router.push({name: 'movieDetail', params: {id: this.movie.id}})
+      this.$router.push({name: 'movieDetail', params: {movieId: this.movie.id}})
     }
   },
   filters: {

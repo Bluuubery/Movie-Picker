@@ -19,7 +19,7 @@ export default {
     };
   },
 	props: {
-		movie_pk : String
+		movieId : String
 	},
   components: {
     MovieReviewItem
@@ -28,7 +28,7 @@ export default {
     const API_URL = this.$store.state.API_URL;
     axios({
       method: "get",
-      url: `${API_URL}/api/articles/${this.movie_pk}/review_movie`,
+      url: `${API_URL}/api/articles/${this.movieId}/review_movie`,
       headers: {
         Authorization: `Token ${this.$store.state.token}`,
       },

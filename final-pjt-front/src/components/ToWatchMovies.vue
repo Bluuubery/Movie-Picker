@@ -21,7 +21,7 @@ export default {
     ToWatchMoviesItem,
   },
   props: {
-    user_pk: String,
+    user_pk: Number,
   },
   data() {
     return {

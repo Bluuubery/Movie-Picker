@@ -101,9 +101,9 @@ export default {
       searchInput.value = null;
     },
     // 영화 디테일 페이지로 이동
-    goMovieDetail(movie_id) {
-      console.log(movie_id)
-      this.$router.push({ name: 'movieDetail', params: { id: movie_id }})
+    goMovieDetail(movieId) {
+      // console.log(movieId)
+      this.$router.push({ name: 'movieDetail', params: { movieId: movieId }})
     },
     // 인생영화 월드컵 페이지로 이동
     goGame(event) {

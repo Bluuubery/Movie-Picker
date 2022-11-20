@@ -48,7 +48,7 @@ const routes = [
     component: () => import('../views/SearchView.vue')
   },
   {
-    path: '/movie/:id',
+    path: '/movie/:movieId',
     name: 'movieDetail',
     component: () => import('../views/MovieDetail.vue')
   },
