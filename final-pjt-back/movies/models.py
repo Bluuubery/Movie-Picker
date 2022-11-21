@@ -46,3 +46,7 @@ class BestMovie(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     # 모든 영화 월드컵에서 우승했는지 여부(맞을 경우 true)
     best_of_best = models.BooleanField(default=False)
+
+class Rating(models.Model):
+    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='rated_movies')
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)

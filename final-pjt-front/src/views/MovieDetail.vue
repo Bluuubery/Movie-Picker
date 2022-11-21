@@ -61,9 +61,7 @@
         <!-- 하위컴포넌트인 추천 영화를 보여줍니다. -->
         <div id="tab_content"  class="area__recommends hidden" data-tab="recommends">
           <div class="recommended-movies">
-            <!-- 이후 db 추가 시 아래 코드로 대체해주세요 -->
-            <RecommendedMovies :movie_detail="this.movie_detail"/>
-            <!-- <RecommendedMovies :recommended-movies="this.movie_detail.recommended"/>  -->
+            <RecommendedMovies :recommended-movies="this.movie_detail.recommended"/> 
           </div>
         </div>
       </div>
