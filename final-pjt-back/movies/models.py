@@ -12,17 +12,29 @@ class Country(models.Model):
 
 
 class Movie(models.Model):
+
+    # 한국어 제목과 원제(검색용)
     title = models.CharField(max_length=100)
+    original_title = models.CharField(max_length=200)
+
+    # 영화 정보
     released_date = models.DateField()
     popularity = models.FloatField()
     vote_count = models.IntegerField()
     vote_avg = models.FloatField()
     overview = models.TextField()
+
+    # 외부 링크(포스터, 배경, 트레일러)
     poster_path = models.CharField(max_length=200)
-    
-    # tmdb에서 genre를 id로 제공해주기 때문에 별도의 중개 필드 작성\
+    backdrop_path = models.CharField(max_length=200)
+    trailer_path = models.CharField(max_length=100)
+
+    # 장르, 국가(M:N)
     genres = models.ManyToManyField(Genre, related_name='movies')
     countries = models.ManyToManyField(Country, related_name='movies')
+    
+    # 추천영화(자신과 M:N)
+    recommended = models.ManyToManyField('self', symmetrical=False, related_name='recommendation')
 
 # 월드컵의 결과로 bestmovie라는 article이 생성되는 느낌으로 이해하면 됩니다.
 class BestMovie(models.Model):

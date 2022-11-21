@@ -1,0 +1,74 @@
+[
+	{
+		"pk": 436270,
+		"model": "movies.movie",
+		"fields": {
+			"title": "블랙 아담",
+			"original_title": "Black Adam",
+			"released_date": "2022-10-19",
+			"popularity": 12157.649,
+			"vote_count": 1191,
+			"vote_avg": 6.8,
+			"overview": "기원전 가장 번성하고 위대한 고대 국가였지만 현재는 국제 군사 조직 인터갱의 독재 국가로 전락한 칸다크. 인터갱의 눈을 피해 고대 유물을 찾던 '아드리아나'는 우연히 5000년 동안 잠들어 있던 '블랙 아담'을 깨우게 된다.  엄청난 괴력과 스피드, 방탄 능력과 자유자재의 고공비행, 번개를 쏘는 능력까지. 온몸이 무기인 '블랙 아담'은 자신의 앞을 막아서는 인터갱들을 모조리 쓸어버리고 칸다크 국민들은 이에 열광한다. 한편, 그의 폭주를 막기 위해 호크맨, 닥터 페이트, 아톰 스매셔, 사이클론으로 구성된 히어로 군단 '저스티스 소사이어티'가 칸다크에 나타나는데...",
+			"poster_path": "/mEdMHGy1FfCUc7PskFO0tibm8jp.jpg",
+			"backdrop_path": "/bQXAqRx2Fgc46uCVWgoPz5L5Dtr.jpg",
+			"trailer_path": "JaV7mmc9HGw",
+			"genres": [
+				28,
+				14,
+				878
+			],
+			"countries": [
+				2
+			]
+		}
+	},
+	{
+		"pk": 882598,
+		"model": "movies.movie",
+		"fields": {
+			"title": "스마일",
+			"original_title": "Smile",
+			"released_date": "2022-09-23",
+			"popularity": 4162.737,
+			"vote_count": 695,
+			"vote_avg": 6.8,
+			"overview": "기괴한 미소를 지으며 자신의 눈 앞에서 목숨을 끊는 환자를 목격한 정신과 의사 ‘로즈’. 그날 이후로 ‘로즈’의 일상에 설명할 수 없는 끔찍한 일들이 잇따라 발생한다. 일상을 덮친 공포에 발버둥치던 ‘로즈’는 이전에도 자신과 같은 일을 겪은 사람들이 있었고 그들 모두 끔찍한 죽음을 피할 수 없었다는 사실을 알게 된다. 시시각각 다가오는 죽음에서 벗어나기 위해 사투를 벌이던 로즈는 잊고 싶던 과거와 마주하게 되는데…",
+			"poster_path": "/8ncuVFt4e0M2NTTsoPtbxfWN5dO.jpg",
+			"backdrop_path": "/olPXihyFeeNvnaD6IOBltgIV1FU.jpg",
+			"trailer_path": "BcDK7lkzzsU",
+			"genres": [
+				27,
+				9648,
+				53
+			],
+			"countries": [
+				2
+			]
+		}
+	},
+	{
+		"pk": 505642,
+		"model": "movies.movie",
+		"fields": {
+			"title": "블랙 팬서: 와칸다 포에버",
+			"original_title": "Black Panther: Wakanda Forever",
+			"released_date": "2022-11-09",
+			"popularity": 3747.097,
+			"vote_count": 803,
+			"vote_avg": 7.5,
+			"overview": "국왕이자 블랙 팬서인 티찰라의 죽음 이후 수많은 강대국으로부터 위협을 받게 된 와칸다. 라몬다, 슈리 그리고 나키아, 오코예, 음바쿠는 각자 사명감을 갖고 와칸다를 지키기 위해 외로운 싸움을 이어간다. 한편, 비브라늄의 패권을 둘러싼 미스터리한 음모와 함께 깊은 해저에서 모습을 드러낸 최강의 적 네이머와 탈로칸의 전사들은 와칸다를 향해 무차별 공격을 퍼붓기 시작하는데…",
+			"poster_path": "/3PCRWLeqp5y20k6XVzcamZR3BWF.jpg",
+			"backdrop_path": "/yYrvN5WFeGYjJnRzhY0QXuo4Isw.jpg",
+			"trailer_path": "_Z3QKkl1WyM",
+			"genres": [
+				28,
+				12,
+				878
+			],
+			"countries": [
+				2
+			]
+		}
+	}
+]
