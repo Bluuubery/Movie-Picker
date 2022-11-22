@@ -73,6 +73,11 @@ const routes = [
     component: () => import('../views/UserDetailView.vue')
   },
   {
+    path: '/feed/',
+    name: 'feed',
+    component: () => import('../views/FeedView.vue')
+  },
+  {
     path: '/404',
     name: 'NotFound404',
     component: () => import('../views/NotFound404.vue')

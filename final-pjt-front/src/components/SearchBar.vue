@@ -56,7 +56,9 @@ export default {
       .then(() => {
         this.$emit('getResults', this.results)
       })
-    }
+    },
+    // 유저를 검색하는 axios 요청입니다.(메서드만 작성, 이후 프론트 작업 시 필요한 컴포넌트에 등록해주세요)
+    searchUser() {}
   },
 };
 </script>

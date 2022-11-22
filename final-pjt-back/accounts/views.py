@@ -27,7 +27,7 @@ def user_profile(request):
     # user = get_object_or_404(get_user_model(), pk=user_pk)
     user = request.user
     print(request.user.id)
-    serializer = ProfileSerializer(user, fields=['id', 'username', 'avatar', 'watched_movies', 'to_watch_movies', 'best_movies', 'followings', 'followers'])
+    serializer = ProfileSerializer(user, fields=['id', 'username', 'avatar', 'watched_movies', 'to_watch_movies', 'best_movies', 'followings', 'followers', ])
     return Response(serializer.data)
 
 
@@ -127,6 +127,26 @@ def follow(request, user_pk):
             following = True
         return Response(following)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_feed(request):
+    user = request.user
+    # 팔로잉
+    followings = get_list_or_404(get_user_model().objects.filter(followers=user))
+    # 팔로잉의 best_movie
+    feed_articles = get_list_or_404(BestMovie.objects.filter(user__in=followings).order_by('-created_at')[:100])
+    serializer = BestMovieSerializer(feed_articles, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def search_user(request, query):
+    users = get_list_or_404(get_user_model().objects.filter(username__icontains=query))
+    serializer = ProfileSerializer(users, many=True, fields=['id', 'username', 'avatar', 'best_movies'])
+    return Response(serializer.data)
 
 
 
