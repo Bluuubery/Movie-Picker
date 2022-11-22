@@ -20,6 +20,9 @@ from .models import *
 from movies.models import *
 from movies.serializers import *
 
+# 기타 라이브러리
+import random
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -148,6 +151,24 @@ def search_user(request, query):
     serializer = ProfileSerializer(users, many=True, fields=['id', 'username', 'avatar', 'best_movies'])
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def get_my_recommendations(request):
+    user = request.user
+    bestmovies = get_list_or_404(BestMovie, user=user)
+
+    recommended_pk_list = []
+    for bestmovie in bestmovies:
+        bestmovie_data = BestMovieSerializer(bestmovie, fields=['movie'])
+        for movie_pk in bestmovie_data.data['movie']['recommended']:
+            recommended_pk_list.append(movie_pk)
+    
+    random_recommendation_pk_list = random.sample(recommended_pk_list, 20)
+    random_recommendations = get_list_or_404(Movie.objects.filter(pk__in=random_recommendation_pk_list))
+    serializer = MovieSerializer(random_recommendations, many=True)
+
+    return Response(serializer.data)
 
 
 @api_view(['GET'])

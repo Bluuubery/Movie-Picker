@@ -20,9 +20,9 @@ urlpatterns = [
 
     path('follow/<int:user_pk>/', views.follow), # 다른 유저 팔로우/언팔로우
 
-    path('search_user/<str:query>/', views.search_user,), # 유저 검색
+    path('search_user/<str:query>/', views.search_user), # 유저 검색
 
-
+    path('get_my_recommendations/', views.get_my_recommendations),
 
     path('testtest/', views.testtest),
 ]

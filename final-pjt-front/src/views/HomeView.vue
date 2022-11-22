@@ -86,7 +86,7 @@
 <script>
 import SearchBar from '@/components/SearchBar';
 import _ from 'lodash';
-// import axios from 'axios';
+import axios from 'axios';
 
 export default {
   name: 'HomeView',
@@ -95,7 +95,73 @@ export default {
   },
   data() {
     return {
-      watched_movies: this.$store.state.watched_movies
+      watched_movies: this.$store.state.watched_movies,
+      // 유저가 선택한 인생영화에 기반해서 임의의 추천영화 20개를 제공합니다(유저가 선택한 인생 영화가 적으면 그보다 적을 수 있음)
+      myRecommendations: []
+      // 아래는 데이터가 제공되는 예시입니다. 프론트 작업 시 참고 후 삭제해주세요
+      // [
+      //   {
+      //       "id": 425,
+      //       "genres": [
+      //           {
+      //               "id": 12,
+      //               "name": "모험"
+      //           },
+      //           {
+      //               "id": 16,
+      //               "name": "애니메이션"
+      //           },
+      //           {
+      //               "id": 35,
+      //               "name": "코미디"
+      //           },
+      //           {
+      //               "id": 10751,
+      //               "name": "가족"
+      //           }
+      //       ],
+      //       "countries": [
+      //           {
+      //               "id": 2,
+      //               "name": "미국"
+      //           }
+      //       ],
+      //       "title": "아이스 에이지",
+      //       "original_title": "Ice Age",
+      //       "released_date": "2002-03-10",
+      //       "popularity": 201.563,
+      //       "vote_count": 11515,
+      //       "vote_avg": 7.3,
+      //       "overview": "거대한 빙하가 온 지구의 표면을 뒤덮기 시작하던 때, 모든 동물들은 따뜻한 남쪽나라로 이동을 시작하지만, 염세적인 털북숭이 맘모스 만프레드만은 유별나게 북쪽으로 향한다. 만프레드는 우연히 떠버리 나무늘보 시드를 만나고, 인간의 아이 로샨을 발견한 뒤 가족을 찾아주기로 한다. 이들은 여행길에 검치 호랑이 디에고와 동행하게 되지만, 디에고는 비밀스런 임무를 맡고 있는 처지다. 바로 호랑이 무리의 두목으로부터 끼니를 때울 만한 인간의 아이를 납치해오라는 명령을 받은 것이다. 과연 로샨은 무사히 가족의 품으로 돌아갈 수 있을까?",
+      //       "poster_path": "/biwqSbuyxjrZMvVcb8Lsv3GyQbw.jpg",
+      //       "backdrop_path": "/a9ykRAWtQnI3SsZDfh8sCJo5cWI.jpg",
+      //       "trailer_path": "CZShn0PZiYU",
+      //       "recommended": [
+      //           12,
+      //           585,
+      //           808,
+      //           809,
+      //           810,
+      //           812,
+      //           862,
+      //           863,
+      //           920,
+      //           950,
+      //           953,
+      //           2062,
+      //           8355,
+      //           8587,
+      //           9502,
+      //           9806,
+      //           10527,
+      //           20352,
+      //           38757,
+      //           57800,
+      //           278154
+      //       ]
+      //   },
+      //   ...
+      // ]
     }
   },
   created() {
@@ -103,6 +169,7 @@ export default {
   },
   mounted() {
     this.clearSearchBar();
+    this.getMyRecommendations()
   },
   methods: {
     // getUser() {
@@ -126,6 +193,23 @@ export default {
     goGame(event) {
       const gameName = event.target.dataset.gamename
       this.$router.push({ name: 'game', params: { gameName: gameName } })
+    },
+
+    // 내 추천 영화(랜덤)을 API GET 요청으로 불러오는 메서드입니다.(mounted에 실행됩니다.)
+    getMyRecommendations() {
+      const API_URL = this.$store.state.API_URL;
+      axios({
+        method: "GET",
+        url: `${API_URL}/api/accounts/get_my_recommendations/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        },
+      })
+        .then((res) => {
+          // console.log(res.data)
+          this.myRecommendations = res.data;
+        })
+        .catch((err) => console.log(err));
     }
   },
   computed: {
