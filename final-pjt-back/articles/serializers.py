@@ -34,4 +34,13 @@ class ReviewSerializer(DynamicFieldsModelSerializer):
     class Meta:
         model = Review
         fields = '__all__'
-        read_only_fields = ('author',)
+        read_only_fields = ('author', 'movie')
+
+
+class ReviewCreateSerializer(DynamicFieldsModelSerializer):
+    username = serializers.CharField(source='author.username', read_only=True)
+
+    class Meta:
+        model = Review
+        fields = '__all__'
+        read_only_fields = ('author', 'movie')

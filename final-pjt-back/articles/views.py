@@ -11,7 +11,7 @@ from rest_framework import status
 from django.shortcuts import get_object_or_404, get_list_or_404
 
 
-from .serializers import ReviewSerializer
+from .serializers import ReviewSerializer, ReviewCreateSerializer
 from .models import Review
 
 # accounts
@@ -42,9 +42,7 @@ def review_user(request, user_pk):
 @permission_classes([IsAuthenticated])
 def review_create(request, movie_pk):
     movie = get_object_or_404(Movie, pk=movie_pk)
-    # 테스트용
-    # user = get_object_or_404(get_user_model(), pk=1) 
-    serializer = ReviewSerializer(data=request.data)
+    serializer = ReviewCreateSerializer(data=request.data)
     if serializer.is_valid(raise_exception=True):
         serializer.save(movie=movie, author=request.user)
         return Response(serializer.data, status=status.HTTP_201_CREATED)

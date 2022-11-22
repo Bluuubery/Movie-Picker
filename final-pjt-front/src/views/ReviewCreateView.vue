@@ -34,9 +34,10 @@ export default {
       }
 
 			const API_URL = this.$store.state.API_URL;
+      console.log(API_URL)
 
       axios({
-        method: "post",
+        method: "POST",
         url: `${API_URL}/api/articles/${this.movieId}/review_create/`,
         headers: {
           Authorization: `Token ${ this.$store.state.token }`
