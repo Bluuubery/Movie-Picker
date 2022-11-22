@@ -21,6 +21,7 @@ const store = new Vuex.Store({
     token: null,
     username: null,
     user_pk: null,
+    avatar: null,
 
     // 인생영화
     best_movie: {},
@@ -54,6 +55,7 @@ const store = new Vuex.Store({
       // 유저 정보 받아오기
       state.username = data['username']
       state.user_pk = data['id']
+      state.avatar = data['avatar']
 
       // 본 영화랑 볼 영화 받아오기
       state.to_watch_movies = data['to_watch_movies'],

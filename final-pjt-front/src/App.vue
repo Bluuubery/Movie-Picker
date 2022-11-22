@@ -5,7 +5,8 @@
         <div class="navbar__logo">무비피커</div>
       </router-link>  
       <router-link :to="{ name: 'userDetail', params: { userId: this.$store.state.user_pk }}" class="navbar__user">
-        <div class="navbar__user-profile">
+        <!-- 프로필 이미지 임시로 추가(스타일링 필요) -->
+        <div class="navbar__user-profile" :style="`background-image: url(${this.$store.state.API_URL}${this.$store.state.avatar}); background-size: cover; width:50px; height: 50px;`">
 
         </div>
         <h3>{{ this.$store.state.username}}</h3>

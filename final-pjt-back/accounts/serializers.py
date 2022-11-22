@@ -41,6 +41,13 @@ class UserSerializer(DynamicFieldsModelSerializer):
         fields = '__all__'
 
 
+# dj-rest-auth의 USER_DETAILS_SERIALIZER를 대체하기 위한 custom serializer(프로필 수정 용도)
+class CustomUserSerializer(DynamicFieldsModelSerializer):
+    class Meta:
+        model = User
+        fields = ('username', 'avatar')
+
+
 
 class BestMovieSerializer(DynamicFieldsModelSerializer):
     movie = MovieSerializer(read_only=True)

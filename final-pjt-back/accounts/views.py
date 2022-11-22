@@ -27,7 +27,7 @@ def user_profile(request):
     # user = get_object_or_404(get_user_model(), pk=user_pk)
     user = request.user
     print(request.user.id)
-    serializer = ProfileSerializer(user, fields=['id', 'username', 'watched_movies', 'to_watch_movies', 'best_movies'])
+    serializer = ProfileSerializer(user, fields=['id', 'username', 'avatar', 'watched_movies', 'to_watch_movies', 'best_movies', 'followings', 'followers'])
     return Response(serializer.data)
 
 
@@ -127,6 +127,8 @@ def follow(request, user_pk):
             following = True
         return Response(following)
     return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
