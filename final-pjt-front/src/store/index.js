@@ -135,7 +135,10 @@ const store = new Vuex.Store({
         context.commit('SAVE_TOKEN', res.data.key)
         this.dispatch('getUser')
       })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        alert('아이디와 비밀번호를 다시 확인해주세요')
+        console.log(err)
+      })
     },
     // 로그인
     login(context, payload) {

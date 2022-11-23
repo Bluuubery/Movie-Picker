@@ -1,6 +1,6 @@
 <template>
   <div class="UserDetail">
-    <!-- <input type="image" @change="onFileChange"> -->
+  <!-- <input type="file" @change="uploadAvatar"> -->
     <div class="header">
       <div class="user-info">
         <div class="user-info__img" :style="`background-image: url(${this.$store.state.API_URL}${this.$store.state.avatar})`">
@@ -184,7 +184,46 @@ export default {
       // movies 바꾸기
       if (tabId === 'watched') this.movies = this.watched_movies
       else this.movies = this.to_watch_movies
+    },
+
+    // 다른 유저의 정보 가져오기(id, username, message, avatar, followings, followers)
+    getOtherUser() {
+      const API_URL = this.$store.state.API_URL;
+      const otherUserPk = 6 // 임시로 설정한 다른 유저의 pk 값입니다. 이후 적절한 데이터로 수정해주세요
+      axios({
+        method: "get",
+        url: `${API_URL}/api/accounts/accounts/get_profile/${otherUserPk}/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+        },
+      })
+      .then((res) => {
+        console.log(res.data) // 확인용 콘솔 로그입니다.
+        // ??? = res.data     // 이후 요청받은 데이터를 적절하게 활용해주세요
+        // 데이터는 아래와 같은 형태로 주어집니다. (otherUserPk로 요청한 값)
+        // {
+            // "id": 6,
+            // "followers": [
+                // 2
+            // ],
+            // "username": "eunsung",
+            // "message": null,
+            // "avatar": "/images/default_avatar_2.svg",
+            // "followings": [
+                // 2,
+                // 3,
+                // 4
+            // ]
+        // }
+      })
+      .catch((err) => console.log(err))
     }
+
+    // // 프사 업로드
+    // uploadAvatar(event) {
+    //   const formdata = new formdata()
+    //   formdata.append('file')
+    // }
   },
 };
 </script>

@@ -6,6 +6,8 @@ app_name = 'accounts'
 urlpatterns = [
     path('profile/', views.user_profile), # 내 프로필
     path('feed/', views.get_feed), # 내 피드(팔로우한 유저들의 인생 영화)
+    path('get_my_recommendations/', views.get_my_recommendations), 
+
     path('update_message/', views.update_message),
 
     path('<int:user_pk>/to_watch/', views.to_watch_list),
@@ -16,14 +18,12 @@ urlpatterns = [
     path('<int:user_pk>/<int:movie_pk>/watched/', views.watched),
 
     path('<int:user_pk>/<int:movie_pk>/add_best/', views.add_best),
-
     path('<int:best_movie_pk>/delete_best/', views.delete_best),
 
     path('follow/<int:user_pk>/', views.follow), # 다른 유저 팔로우/언팔로우
-
     path('search_user/<str:query>/', views.search_user), # 유저 검색
+    path('get_profile/<int:user_pk>/', views.get_profile), # 다른 사람의 프로필(이름, 상메, 프사, 팔로잉, 팔로우)
 
-    path('get_my_recommendations/', views.get_my_recommendations),
-
-    path('testtest/', views.testtest),
+    
+    # path('testtest/', views.testtest), # 테스트용 url입니다.
 ]
