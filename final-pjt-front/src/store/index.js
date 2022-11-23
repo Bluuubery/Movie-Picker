@@ -6,13 +6,13 @@ import createPersistedState from 'vuex-persistedstate'
 
 Vue.use(Vuex)
 
-// const API_URL = 'http://127.0.0.1:8000';
-
-
 
 const store = new Vuex.Store({
   plugins: [
-    createPersistedState()
+    createPersistedState({
+      key: 'vuexStore',
+      storage: window.sessionStorage,
+    })
   ],
   state: {
     // API_URL
@@ -22,6 +22,7 @@ const store = new Vuex.Store({
     username: null,
     user_pk: null,
     avatar: null,
+    message: null,
 
     // 인생영화
     best_movie: {},
@@ -67,6 +68,7 @@ const store = new Vuex.Store({
       state.username = data['username']
       state.user_pk = data['id']
       state.avatar = data['avatar']
+      state.message = data['message']
 
       // 본 영화랑 볼 영화 받아오기
       state.to_watch_movies = data['to_watch_movies'],
@@ -100,13 +102,19 @@ const store = new Vuex.Store({
       state.to_watch_movies = [],
       state.followings = [],
       state.followers = []
+      state.message = []
 
-      localStorage.clear();
+      // localStorage.clear();
 
       router.push({name: 'login'})
     },
     REFRESH_WATCHED_MOVIES(state, data) {
       state.watched_movies = data.watched_movies
+    },
+
+    // 상태메세지 변경
+    UPDATE_MESSAGE(state, data) {
+      state.message = data.message
     }
   },
   actions: {
@@ -146,10 +154,11 @@ const store = new Vuex.Store({
         context.commit('SAVE_TOKEN', res.data.key)
         this.dispatch('getUser')
       })
-      .catch(err => console.log(err))
+      .catch((err) => {
+        alert('아이디와 비밀번호를 다시 확인해주세요')
+        console.log(err)
+      })
       
-      // this.state.username = username
-      // this.state.password = password
       
     },
 
@@ -170,20 +179,19 @@ const store = new Vuex.Store({
 
     // 유저 정보
     getUser(context) {
-      // console.log('here')
-      // console.log(context.state)
+
       axios({
         method: 'get',
-        // url: `${API_URL}/api/accounts/${context.state.user_pk}`,
         url: `${context.state.API_URL}/api/accounts/profile/`,
         headers: {
-          // Authorization: `Token 6023611848bfca271b0de4cb5db50064289b791d`
           Authorization: `Token ${ context.state.token }`
         }
       })
       .then(res => {
-        // console.log(res)
         context.commit('GET_USER', res.data)
+      })
+      .catch((err) => {
+        console.log(err)
       })
     },
 
@@ -242,6 +250,26 @@ const store = new Vuex.Store({
       .then(() => {
         context.dispatch('getUser')
       })
+    },
+
+    // 상태 메세지 수정 요청
+    updateMessage(context, payload) {
+      const message = payload.message
+      axios({
+        method: 'PATCH',
+        url: `${context.state.API_URL}/api/accounts/update_message/`,
+        headers: {
+          Authorization: `Token ${ context.state.token }`
+        },
+        data: {
+          message
+        }
+      })
+        .then((res) => {
+          // state에 저장되어있는 상태메세지를 변경합니다. 
+          context.commit('UPDATE_MESSAGE', res.data)
+        })    
+        .catch((err) => console.log(err))
     }
   },
   modules: {

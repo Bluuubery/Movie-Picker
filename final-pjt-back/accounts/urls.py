@@ -6,6 +6,7 @@ app_name = 'accounts'
 urlpatterns = [
     path('profile/', views.user_profile), # 내 프로필
     path('feed/', views.get_feed), # 내 피드(팔로우한 유저들의 인생 영화)
+    path('update_message/', views.update_message),
 
     path('<int:user_pk>/to_watch/', views.to_watch_list),
     path('<int:user_pk>/watched/', views.watched_list),

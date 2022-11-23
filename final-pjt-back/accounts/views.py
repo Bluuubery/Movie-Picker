@@ -30,8 +30,17 @@ def user_profile(request):
     # user = get_object_or_404(get_user_model(), pk=user_pk)
     user = request.user
     print(request.user.id)
-    serializer = ProfileSerializer(user, fields=['id', 'username', 'avatar', 'watched_movies', 'to_watch_movies', 'best_movies', 'followings', 'followers', ])
+    serializer = ProfileSerializer(user, fields=['id', 'username', 'avatar', 'message', 'watched_movies', 'to_watch_movies', 'best_movies', 'followings', 'followers', ])
     return Response(serializer.data)
+
+
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_message(request):
+    serializer = UserSerializer(request.user, data=request.data, fields=['id', 'message'])
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+        return Response(serializer.data)
 
 
 @api_view(['GET'])
@@ -148,7 +157,7 @@ def get_feed(request):
 @permission_classes([IsAuthenticated])
 def search_user(request, query):
     users = get_list_or_404(get_user_model().objects.filter(username__icontains=query))
-    serializer = ProfileSerializer(users, many=True, fields=['id', 'username', 'avatar', 'best_movies'])
+    serializer = ProfileSerializer(users, many=True, fields=['id', 'username', 'message', 'avatar', 'best_movies'])
     return Response(serializer.data)
 
 
