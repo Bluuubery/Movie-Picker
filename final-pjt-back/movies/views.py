@@ -60,6 +60,9 @@ def movie_detail(request, movie_pk):
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def picked_users(request, movie_pk):
-    best_movies = get_list_or_404(BestMovie.objects.filter(movie=movie_pk).order_by('-created_at'))
+    best_movies = get_list_or_404(BestMovie.objects.filter(movie=movie_pk).order_by('created_at'))
     serializer = BestMovieSerializer(best_movies, many=True, fields=['user', 'created_at'])
-    return Response(serializer.data)
+
+    picked_users = {data['user']['id']: data for data in serializer.data}.values()
+
+    return Response(picked_users)
