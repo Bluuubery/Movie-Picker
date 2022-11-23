@@ -57,13 +57,10 @@ const store = new Vuex.Store({
     // auth
     SAVE_TOKEN(state, token) {
       state.token = token
-      router.push({name: 'home'}).catch(() => {})
-      // this.$store.dispatch('getUser')
     },
 
     // best_movie(인생영화), all_best_movies(명에의 전당) 저장
     GET_USER(state, data) {
-      // console.log(data)
 
       // 유저 정보 받아오기
       state.username = data['username']
@@ -78,7 +75,6 @@ const store = new Vuex.Store({
       // 팔로잉/팔로우 
       state.followings = data['followings']
       state.followers = data['followers']
-      
       // watched_movies 없으면 first_adddMovie로 보냄
       if (!state.watched_movies.length) {
         router.push({ name: 'first-addMovie'})
@@ -94,6 +90,8 @@ const store = new Vuex.Store({
       state.search_result = data
     },
     LOGOUT(state) {
+      sessionStorage.clear()
+
       state.token = null
       state.username = null
       state.user_pk = null
@@ -103,7 +101,8 @@ const store = new Vuex.Store({
       state.to_watch_movies = [],
       state.followings = [],
       state.followers = []
-      state.message = []
+      state.message = null
+      state.avatar = null
 
       // localStorage.clear();
 
@@ -136,6 +135,9 @@ const store = new Vuex.Store({
         context.commit('SAVE_TOKEN', res.data.key)
         this.dispatch('getUser')
       })
+      .then(() => {
+        this.dispatch('toHome')
+      })
       .catch((err) => {
         alert('아이디와 비밀번호를 다시 확인해주세요')
         console.log(err)
@@ -154,16 +156,26 @@ const store = new Vuex.Store({
         }
       })
       .then(res => {
-        // console.log(res.data)
         context.commit('SAVE_TOKEN', res.data.key)
+        // this.dispatch('getUser')
+      })
+      .then(() => {
         this.dispatch('getUser')
+      })
+      .then(() => {
+        setTimeout(() => {
+          this.dispatch('toHome')
+        }, 500);
       })
       .catch((err) => {
         alert('아이디와 비밀번호를 다시 확인해주세요')
         console.log(err)
       })
-      
-      
+    },
+
+    // 홈으로 보냄
+    toHome() {
+      router.push({name: 'home'}).catch(() => {})
     },
 
     // 로그아웃
@@ -238,7 +250,6 @@ const store = new Vuex.Store({
     // 팔로우 비동기
     follow(context, payload) {
       const userId = payload.userId
-      console.log(userId)
       const API_URL = context.state.API_URL
       const FOLLOW_URL = `${API_URL}/api/accounts/follow/${userId}/`
       
