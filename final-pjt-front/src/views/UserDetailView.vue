@@ -1,6 +1,7 @@
 <template>
   <div class="UserDetail">
-  <!-- <input type="file" @change="uploadAvatar"> -->
+  <input type="file" ref="avatarImage" @change="uploadAvatar">
+  <button type="submit" @click.prevent="submitAvatar"> Submit</button>
     <div class="header">
       <div class="user-info">
         <div class="user-info__img" :style="`background-image: url(${this.$store.state.API_URL}${this.$store.state.avatar})`">
@@ -69,6 +70,8 @@ export default {
       movies: [],
 
       reviews: [],
+
+      selectedFile: null,
     };
   },
 
@@ -217,13 +220,36 @@ export default {
         // }
       })
       .catch((err) => console.log(err))
-    }
+    },
 
-    // // 프사 업로드
-    // uploadAvatar(event) {
-    //   const formdata = new formdata()
-    //   formdata.append('file')
-    // }
+    // 프사 업로드
+    uploadAvatar() {
+      this.selectedFile = this.$refs.avatarImage.files
+      console.log(this.selectedFile)
+    },
+
+    // 서버에 전송
+    submitAvatar() {
+      const API_URL = this.$store.state.API_URL;
+      const formdata = new FormData()
+
+      formdata.append('avatar', this.selectedFile[0])
+      console.log(formdata)
+
+      axios({
+        method: "PATCH",
+        url: `${API_URL}/api/accounts/update_avatar/`,
+        headers: {
+          Authorization: `Token ${this.$store.state.token}`,
+          'Content-Type': 'multipart/form-data',
+        },
+        data: formdata
+      })
+        .then(() => {
+          this.$store.dispatch('getUser')
+        })
+        .catch((err) => console.log(err))
+    }
   },
 };
 </script>

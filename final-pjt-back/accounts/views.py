@@ -79,6 +79,14 @@ def update_message(request):
         serializer.save()
         return Response(serializer.data)
 
+@api_view(['PATCH'])
+@permission_classes([IsAuthenticated])
+def update_avatar(request):
+    serializer = UserSerializer(request.user, data=request.data, fields=['id', 'avatar'])
+    if serializer.is_valid(raise_exception=True):
+        serializer.save()
+        return Response(serializer.data)
+
 
 
 # to watch, watch, best 목록
